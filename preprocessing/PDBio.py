@@ -44,7 +44,7 @@ class myPDBList(Bio.PDB.PDBList):
         kwargs['pdb'] = structures_folder
         super().__init__(*args,**kwargs)
         self.alphafold_server = 'https://alphafold.ebi.ac.uk/' # entry/Q13469
-        # self.pdb_server = 'ftp://ftp.ebi.ac.uk/pub/databases/pdb/'
+        self.pdb_server = 'https://files.wwpdb.org'
         self.flat_tree = True
         return
 
