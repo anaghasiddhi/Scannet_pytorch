@@ -1,0 +1,23 @@
+# Core ML / Deep Learning
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Data handling
+numpy>=1.23
+pandas>=1.5
+scipy>=1.9
+scikit-learn>=1.2
+
+# Utilities
+tqdm>=4.65
+pyyaml>=6.0
+
+# Biology / Structures
+biopython>=1.81
+mdtraj>=1.9.9
+
+# Plotting & Metrics
+matplotlib>=3.7
+seaborn>=0.12
+
