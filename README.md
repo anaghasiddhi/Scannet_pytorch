@@ -9,7 +9,7 @@ This repo provides:
 - Support for distributed training (DDP), early stopping, focal loss, hard negative mining, and exponential moving average (EMA).
 
 ##  Repository Structure
-
+```
 ScanNet-PyTorch/
 │── scannet_pytorch/
 │   ├── network/           # ScanNet model (attention, embeddings, utils)
@@ -26,7 +26,7 @@ ScanNet-PyTorch/
 │── README.md
 │── .gitignore
 │── LICENSE
-
+```
 ## Installation
 1. Clone the repo:
    ```bash
