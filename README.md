@@ -27,7 +27,7 @@ ScanNet-PyTorch/
 │── .gitignore
 │── LICENSE
 
-## ⚙️Installation
+## Installation
 1. Clone the repo:
    ```bash
    git clone git@github.com:anaghasiddhi/Scannet_pytorch.git
