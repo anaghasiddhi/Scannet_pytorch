@@ -71,3 +71,4 @@ notebooks/.ipynb_checkpoints/
 
 # Local / temp
 tmp/
+data/*.pkl
