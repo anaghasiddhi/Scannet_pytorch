@@ -5,18 +5,16 @@ from numba.typed import List,Dict
 list_atoms_types = ['C', 'O', 'N', 'S']  # H
 VanDerWaalsRadii = np.array([1.70, 1.52, 1.55, 1.80])  # 1.20
 
-atom_mass = np.array(
-    [
-        12,  # C
-        16,  # O
-        14,  # N
-        32  # S
-    ]
-)
 
+atom_mass = np.array([
+    12,  # C
+    16,  # O
+    14,  # N
+    32   # S
+], dtype=np.float32)
 
-atom_type_to_index = dict([(list_atoms_types[i], i)
-                           for i in range(len(list_atoms_types))])
+# Mapping element symbol → type index
+atom_type_to_index = {elem: i for i, elem in enumerate(list_atoms_types)}
 
 
 list_atoms = ['C', 'CA', 'CB', 'CD', 'CD1', 'CD2', 'CE', 'CE1', 'CE2', 'CE3',
@@ -24,16 +22,18 @@ list_atoms = ['C', 'CA', 'CB', 'CD', 'CD1', 'CD2', 'CE', 'CE1', 'CE2', 'CE3',
               'NE', 'NE1', 'NE2', 'NH1', 'NH2', 'NZ', 'O', 'OD1', 'OD2', 'OE1',
               'OE2', 'OG', 'OG1', 'OH', 'OXT', 'SD', 'SE', 'SG']
 
-atom_to_index = dict([(list_atoms[i], i) for i in range(len(list_atoms))])
+atom_to_index = {atom: i for i, atom in enumerate(list_atoms)}
 atom_to_index['OT1'] = atom_to_index['O']
 atom_to_index['OT2'] = atom_to_index['OXT']
 
-index_to_type = np.zeros(38,dtype=np.int)
-for atom,index in atom_to_index.items():
-    index_to_type[index] = list_atoms_types.index(atom[0])
+# Atom index → atom type index (e.g., 0 for C, 1 for O)
+index_to_type = np.zeros(len(list_atoms), dtype=np.int32)
+for atom, index in atom_to_index.items():
+    index_to_type[index] = atom_type_to_index.get(atom[0], 0)
 
-atom_type_mass = np.zeros( 38 )
-for atom,index in atom_to_index.items():
+# Atom index → atomic mass
+atom_type_mass = np.zeros(len(list_atoms), dtype=np.float32)
+for atom, index in atom_to_index.items():
     atom_type_mass[index] = atom_mass[index_to_type[index]]
 
 '''
@@ -79,8 +79,7 @@ residue_dictionary = {'CYS': 'C', 'ASP': 'D', 'SER': 'S', 'GLN': 'Q', 'LYS': 'K'
 
 hetresidue_field = [' '] + ['H_%s'%name for name in residue_dictionary.keys()]
 
-aa_to_index = dict([(list_aa[i],i) for i in range(20)])
-
+aa_to_index = {aa: i for i, aa in enumerate(list_aa)}
 '''
 !!!! Non-exhaustive, only included the first two bonds.
 '''
@@ -327,7 +326,7 @@ for aa,atom_covalent_bonds in dictionary_covalent_bonds.items():
         for l,bond in enumerate(bonds):
             if bond is not None:
                 bonds_num[l] = atom_to_index[bond]
-        dictionary_covalent_bonds_numba['%s_%s'%(aa, atom_to_index[atom] )] = bonds_num
+        dictionary_covalent_bonds_numba[f'{aa}_{atom_to_index[atom]}'] = bonds_num
 
 
 
@@ -578,10 +577,24 @@ dictionary_atom_valencies = {
 
 }
 
-
-index_to_valency = np.zeros([20, 38], dtype=np.int)
+index_to_valency = np.zeros((20, 38), dtype=np.int32)
 for k, aa in enumerate(list_aa):
     for key, value in dictionary_atom_valencies[aa].items():
         i = list_atoms.index(key)
         j = list_atom_valencies.index(value)
         index_to_valency[k, i] = j
+
+def has_complete_ca(structure, chain_id):
+    """
+    Checks if all residues in the given chain have a C-alpha atom.
+    """
+    try:
+        model = structure[0]  # Usually single model
+        chain = model[chain_id]
+        for residue in chain:
+            if "CA" not in residue:
+                return False
+        return True
+    except Exception as e:
+        print(f"[❌] Error checking Cα atoms for chain {chain_id}: {e}")
+        return False

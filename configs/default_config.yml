@@ -1,0 +1,14 @@
+features:
+  - primary
+  - secondary
+  - conservation
+  - asa
+  - residue_depth
+  - half_sphere
+  - coordination
+  - volume_index
+  - pwm
+  - npwm
+
+Beff: 50
+with_gaps: true

@@ -56,7 +56,7 @@ def _get_atom_triplets(sequence, atom_ids, dictionary_covalent_bonds_numba):
                 if key in all_keys:
                     previous_id, next_id, _ = dictionary_covalent_bonds_numba[(aa + '_' + str(id) )]
                 else:
-                    print('Strange atom', (aa + '_' + str(id) ))
+#                     print('Strange atom', (aa + '_' + str(id) ))
                     previous_id = -1
                     next_id = -1
                 if previous_id in atom_id:
@@ -343,7 +343,7 @@ def _add_virtual_atoms(atom_clouds, atom_triplets, verbose=True):
                 virtual_atom = atom_clouds[next_triplet[0]] - atom_clouds[next_triplet[2]] + atom_clouds[triplet[0]]
             else:  # Next of next is also absent. Pathological case, use absolute x direction...
                 if verbose:
-                    print('Pathological case, atom has only one bond and its next partner too', triplet[0], triplet[2])
+#                     print('Pathological case, atom has only one bond and its next partner too', triplet[0], triplet[2])
                     # print('Pathological case, atom %s has only one bond and its next partner %s too'%(triplet[0],triplet[2]))
                 virtual_atom = atom_clouds[triplet[0]] + np.array([1, 0, 0])
             virtual_atom_clouds.append(virtual_atom)
@@ -358,7 +358,7 @@ def _add_virtual_atoms(atom_clouds, atom_triplets, verbose=True):
                     triplet[0]]
             else:  # Previous of previous is also absent. Pathological case, use absolute z direction...
                 if verbose:
-                    print('Pathological case, atom has only one bond and its previous partner too', triplet[0],
+#                     print('Pathological case, atom has only one bond and its previous partner too', triplet[0],
                           triplet[1])
                     # print('Pathological case, atom %s has only one bond and its previous partner %s too'%(triplet[0],triplet[1]))
                 virtual_atom = atom_clouds[triplet[0]] + np.array([0, 0, 1])
@@ -368,7 +368,7 @@ def _add_virtual_atoms(atom_clouds, atom_triplets, verbose=True):
 
         elif case4:  # Atom has no covalent bonds. Should never happen, use absolute coordinates.
             if verbose:
-                print('Pathological case, atom has no bonds at all', triplet[0])
+#                 print('Pathological case, atom has no bonds at all', triplet[0])
                 # print('Pathological case, atom %s has no bonds at all' %triplet[0])
             virtual_previous_atom = atom_clouds[triplet[0]] + np.array([1, 0, 0])
             virtual_next_atom = atom_clouds[triplet[0]] + np.array([0, 0, 1])

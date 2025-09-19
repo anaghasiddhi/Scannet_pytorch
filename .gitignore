@@ -1,12 +1,18 @@
-# Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# Distribution / packaging
+# Build / packaging
 .Python
 build/
 develop-eggs/
@@ -25,122 +31,43 @@ wheels/
 *.egg
 MANIFEST
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
+# Logs and outputs
+logs/
+runs/
+results/logs/
+nohup.out
 *.log
-local_settings.py
-db.sqlite3
+metrics_log.csv
+sweep*.tsv
 
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# Local files.
-predictions/
-plots/
-pipelines/
+# Datasets and raw data
+data/
+datasets/
+processed_chains/
 PDB/
-MSA/
-tmp/
-baselines/homology/cache/
-baselines/homology/*.Linux
+PDB_backup/
 
-# Pycharm
+# Models and checkpoints
+checkpoints/
+models/
+*.pt
+*.h5
+*.data
+initial_values/
+
+# Jupyter
+.ipynb_checkpoints
+notebooks/.ipynb_checkpoints/
+
+# Old versions / backups
+*.save
+*.save.*
+*.bak
+
+# IDE / editor cruft
 .idea/
+.vscode/
+.DS_Store
 
-# MAC OS
-.DS_Store
-*.DS_Store
-
-models/initial_values/*
-models/*retrained*
-models/*check*
-models/*handcrafted*
-#visualizations/*.data
-data/pdb/*.txt
-data/tmp/*
-predictions/.DS_Store
-.DS_Store
-datasets/.DS_Store
-.DS_Store
-datasets/.DS_Store
-utilities/paths_jerome.py
-*test.ipynb
+# Local / temp
+tmp/
