@@ -32,17 +32,18 @@ ScanNet-PyTorch/
    ```bash
    git clone git@github.com:anaghasiddhi/Scannet_pytorch.git
    cd Scannet_pytorch
-```
+    ```
+  
 2. Create environment:
-
+  ```bash
+  conda create -n scannet_pytorch python=3.10
+  conda activate scannet_pytorch
+  pip install -r requirements.txt
 ```
-conda create -n scannet_pytorch python=3.10
-conda activate scannet_pytorch
-pip install -r requirements.txt
-```
+ 
 Or use the provided scannet_pytorch_env.yml with conda:
 
-```
+```bash
 conda env create -f scannet_pytorch/scannet_pytorch_env.yml
 conda activate scannet_pytorch
 ```
@@ -66,12 +67,13 @@ python scannet_pytorch/preprocessing/preprocess_biolip.py \
 ```
 
 ### Outputs:
-
+```bash
 data/train.data/*.npy → feature quartets
 
 data/train_labels.pkl → labels
 
 data/train_processed_ids.txt → processed chain IDs
+```
 (similar for val and test).
 
 ## Training
@@ -114,11 +116,11 @@ python scannet_pytorch/train_pytorch.py \
     --test_ids data/test_processed_ids.txt
 ```
 ### Outputs:
-
+```bash
 results/logs_run1/pr_curve_val.png
 
 results/logs_run1/ops_val.json
-
+```
 
 
 ---
